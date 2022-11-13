@@ -6,33 +6,26 @@
 /*   By: pmallard <pmallard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 00:13:24 by pmallard          #+#    #+#             */
-/*   Updated: 2022/11/13 20:06:59 by pmallard         ###   ########.fr       */
+/*   Updated: 2022/11/13 23:56:11 by pmallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include "ft_printf.h"
 
 int	ft_printf(const char *form, ...)
 {
 	va_list	args;
 	int	count;
-	int	i;
 
-	i = 0;
 	count = 0;
 	va_start(args, form);
-	while (form[i])
-	{
-		if (form[i] == '%')
-		{
-			count += ft_form(args, form[i + 1]);
-			i++;
-		}
-		else
-			count += ft_putchar(form[i]);
-	}
+	if (form[0] == '%')
+		count += ft_form(args, form[1]);
+	else
+		count += ft_printchar(form[1]);
 	va_end(args);
 	return (count);
 }
@@ -67,7 +60,7 @@ int	ft_form(va_list args, const char form)
 
 int	ft_printpercentage()
 {
-	write(1, '%', 1);
+	write(1, "%", 1);
 	return (1);
 }
 
@@ -78,7 +71,7 @@ int	ft_printnbr(int n)
 
 	count = 0;
 	num = ft_itoa(n);
-	count += ft_printStr(num);
+	count += ft_printstr(num);
 	free(num);
 	return (count);
 }
@@ -95,7 +88,7 @@ int	ft_printstr(char *str)
 	count = 0;
 	if (str == NULL)
 	{
-		write(1, 'null', 4);
+		write(1, "null", 4);
 		return (4);
 	}
 	while (str[count])
@@ -106,7 +99,7 @@ int	ft_printstr(char *str)
 	return (count);
 }
 
-int	ft_printchar(int c)
+int	ft_printchar(char c)
 {
 	write (1, &c, 1);
 	return (1);
@@ -156,4 +149,16 @@ char	*ft_itoa(int nb)
 		len--;
 	}
 	return (res);
+}
+
+int	main(void)
+{
+	ft_printf("%c", "Q");
+	write(1, "\n", 1);
+	ft_printf("%s", "abc");
+	write(1, "\n", 1);
+	ft_printf("%i", "-990");
+	write(1, "\n", 1);
+	ft_printf("%%", "abc");
+	write(1, "\n", 1);
 }
