@@ -1,4 +1,7 @@
 {
     "42header.email": "pmallard@student.42.fr",
-    "42header.username": "pmallard"
+    "42header.username": "pmallard",
+    "files.associations": {
+        "algorithm": "c"
+    }
 }

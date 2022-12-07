@@ -6,7 +6,7 @@
 /*   By: pmallard <pmallard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 19:45:16 by pmallard          #+#    #+#             */
-/*   Updated: 2022/12/07 13:20:35 by pmallard         ###   ########.fr       */
+/*   Updated: 2022/12/07 20:11:13 by pmallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ int	ft_nbrlen(int n)
 	return (count);
 }
 
-
 int	ft_printnbr(int nb)
 {
 	int	count;
 
 	count = ft_nbrlen(nb);
+	if (nb == -2147483648)
+	{
+		return (write (1, "-2147483648", 11));
+	}
 	if (nb < 0)
 	{
 		nb *= -1;

@@ -6,7 +6,7 @@
 /*   By: pmallard <pmallard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 02:02:20 by pmallard          #+#    #+#             */
-/*   Updated: 2022/12/05 20:11:59 by pmallard         ###   ########.fr       */
+/*   Updated: 2022/12/07 19:17:35 by pmallard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int	ft_printptr(unsigned long ptr)
 
 	count = 0;
 	if (!ptr)
-		count += write(1, "0", 1);
+		count += write(1, "(nil)", 5);
 	else
 	{
+		count += write(1, "0x", 2);
 		count += ft_ptrlen(ptr);
 		ft_putptr(ptr);
 	}
